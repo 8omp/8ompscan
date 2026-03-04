@@ -75,7 +75,7 @@ static int connect_to_port(char *ipaddr, int n_port){
     
     if(rc == 0){
         ret_code = PS_CONNECT;
-    }else if(errno == ECONNREFUSED){
+    }else if(errno == ECONNREFUSED || errno == ETIMEDOUT || errno == EINPROGRESS){
         ret_code = PS_NOCONNECT;
     }else{
         perror("connect");
@@ -89,16 +89,6 @@ static int connect_to_port(char *ipaddr, int n_port){
 
 //ポート番号に対応するサービス名を出力する
 static void print_portname(int port_num){
-
-    // struct servent *se = NULL;
-
-    // se = getservbyport(htons(port_num), "tcp");
-
-    // if(se == NULL){
-    //     fprintf(stdout, "port = %5d, unknown\n", port_num);
-    // }else{
-    //     fprintf(stdout, "port = %5d, service = %s\n", port_num, se->s_name);
-    // }
 
     struct sockaddr_in sa;
     char service[32];
@@ -127,10 +117,10 @@ static void port_scan(char *ipaddr, int start_port, int end_port){
     for(port_num = start_port; port_num <= end_port; port_num++){
         rc = connect_to_port(ipaddr, port_num);
 
-        if(rc == PS_ERROR){
-            fprintf(stderr, "Error occurred while connecting to port %d\n", port_num);
-            //exit(EXIT_FAILURE);
-        }
+        // if(rc == PS_ERROR){
+        //     fprintf(stderr, "Error occurred while connecting to port %d\n", port_num);
+        //     exit(EXIT_FAILURE);
+        // }
 
         if(rc == PS_CONNECT){
             print_portname(port_num);
