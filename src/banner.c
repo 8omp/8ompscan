@@ -26,10 +26,10 @@ void print_banner(void){
 
     // Authorとツール情報を出力
     printf("\n");
-    printf("==================================================\n");
+    printf("==========================================================\n");
     printf("%s[*] Author: 8omp%s\n", COLOR_GREEN, COLOR_RESET);
     printf("%s[*] Version : 1.0.0%s\n", COLOR_GREEN, COLOR_RESET);
     printf("%s[*] Github  : https://github.com/8omp/C_port-scanner%s\n", COLOR_GREEN, COLOR_RESET);
     printf("%s[!] WARNING : For educational and authorized testing only.%s\n", COLOR_RED, COLOR_RESET);
-    printf("==================================================\n\n");
+    printf("==========================================================\n\n");
 }
