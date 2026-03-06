@@ -11,6 +11,7 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <netdb.h>
+#include "../include/banner.h"
 
 #define PS_CONNECT 0   /* ポートに接続できた場合 */
 #define PS_NOCONNECT 1 /* ポートに接続できなかった場合 */
@@ -131,6 +132,7 @@ static void port_scan(char *ipaddr, int start_port, int end_port){
 
 int main(int argc, char *argv[]){
 
+    print_banner();
     if(argc != 4){
         fprintf(stderr, "Usage: %s <IP address> <start port> <end port>\n", argv[0]);
         exit(EXIT_FAILURE);
