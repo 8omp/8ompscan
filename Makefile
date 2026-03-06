@@ -25,4 +25,3 @@ clean:
 	rm -rf $(OBJ_DIR) $(TARGET)
 
 .PHONY: all clean
-```// filepath: /home/bomp/mytools/C-portscan/Makefile
