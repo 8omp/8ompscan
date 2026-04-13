@@ -11,7 +11,7 @@ int main(int argc, char *argv[]){
         exit(EXIT_FAILURE);
     }
 
-    char *ipaddr = argv[1];
+    char *dest_ipaddr = argv[1];
     int start_port = atoi(argv[2]);
     int end_port = atoi(argv[3]);
 
@@ -20,7 +20,8 @@ int main(int argc, char *argv[]){
         exit(EXIT_FAILURE);
     }
 
-    scan_connect(ipaddr, start_port, end_port);
+    //scan_connect(dest_ipaddr, start_port, end_port);
+    syn_scan(dest_ipaddr, start_port, end_port);
 
     return 0;
 }

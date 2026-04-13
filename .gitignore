@@ -19,3 +19,4 @@ core
 sample
 .github
 devnote.md
+src/test_syn.c
