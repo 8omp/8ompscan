@@ -29,8 +29,8 @@ uint16_t checksum(uint16_t *buf, int size) {
 
 int main(int argc, char *argv[]) {
 
-    char source_ip[16] = "127.0.0.1";
-    char dest_ip[16] = "127.0.0.1";
+    char source_ip[16] = "192.168.0.13";
+    char dest_ip[16] = "192.168.0.1";
 
     int sock = socket(AF_INET, SOCK_RAW, IPPROTO_RAW);
     if(sock < 0){
@@ -50,6 +50,7 @@ int main(int argc, char *argv[]) {
     sin.sin_addr.s_addr = inet_addr(dest_ip);
 
     // IPヘッダの設定
+    // IPヘッダの長さは、IPヘッダのサイズを4バイト単位で表す必要があるため、5に設定。5にしているのは、定義が4bitで11までしか表せないから。
     iph->ihl = 5; // IPヘッダの長さ (5 * 4 = 20バイト)4倍は<<2で後に計算する
     iph->version = 4;
     iph->tos = 0;// Type of Service, 通常は0でいいっぽい
@@ -66,7 +67,7 @@ int main(int argc, char *argv[]) {
     iph->check = checksum((uint16_t *)datagram, iph->ihl<<2);// <<2は4倍するため
 
     // TCPヘッダの設定
-    tcph->source = htons(12345); // 任意の送信元ポート
+    tcph->source = htons(12340); // 任意の送信元ポート
     tcph->dest = htons(80); // 任意の宛先ポート
     tcph->seq = htonl(0);
     tcph->ack_seq = 0;
